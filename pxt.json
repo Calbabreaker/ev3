@@ -2,7 +2,8 @@
     "name": "ev3",
     "description": "",
     "dependencies": {
-        "ev3": "*"
+        "ev3": "*",
+        "broadcast": "*"
     },
     "files": [
         "main.blocks",
@@ -15,5 +16,5 @@
     "supportedTargets": [
         "ev3"
     ],
-    "preferredEditor": "blocksprj"
+    "preferredEditor": "tsprj"
 }
