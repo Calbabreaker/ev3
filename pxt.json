@@ -7,11 +7,10 @@
     },
     "files": [
         "main.ts",
-        "README.md"
+        "README.md",
+        "robot.ts"
     ],
-    "testFiles": [
-        "test.ts"
-    ],
+    "testFiles": [],
     "supportedTargets": [
         "ev3"
     ],
