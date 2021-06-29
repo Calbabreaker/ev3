@@ -49,16 +49,31 @@ function turn(degrees: number, speed: number = 50): void {
 }
 
 let currentPrintLine = 1;
+
+/**
+ * Prints a line of text to the robot screen.
+ * 
+ * @param message - The message to print.
+ */
 function println(message: string): void {
     brick.showString(message, currentPrintLine);
     currentPrintLine++;
 }
 
+/**
+ * Clears the robot screen.
+ */
 function clearScreen(): void  {
     brick.clearScreen();
     currentPrintLine = 1;
 }
 
+/**
+ * Blinks a status light by the specified milliseconds.
+ * 
+ * @param statusLight - The status light to blink. Eg: `StatusLight.Red`.
+ * @param durationMillis - The duration of the blink in milliseconds.
+ */
 function blinkLight(statusLight: StatusLight, durationMillis: number) {
     brick.setStatusLight(statusLight);
     control.waitMicros(durationMillis * 1000);
@@ -74,13 +89,8 @@ interface IProgram {
      */
     name: string;
     /**
-     * Function that will be called every time the middle button is pressed.
-     * Put the robot main program here.
+     * Function that will be called every when the program is selected.
+     * Put the robot instructions here.
      */
-    run: Function;
-    /**
-     * Funciton that will be called only the first time when the middle button is pressed.
-     * Put event listeners stuff here (this function is optional).
-     */
-    setup?: Function;
+    run: () => void;
 }

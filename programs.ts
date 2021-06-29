@@ -2,9 +2,6 @@ const programs: IProgram[] = [
     {
         name: "light sensor",
         run: () => {
-            moveForward(Infinity);
-        },
-        setup: () => {
             ROBOT.csensor.setThreshold(Light.Dark, 10);
             ROBOT.csensor.onLightDetected(
                 LightIntensityMode.Reflected,
@@ -23,6 +20,8 @@ const programs: IProgram[] = [
                     }
                 }
             );
+
+            moveForward(Infinity);
         },
     },
     {

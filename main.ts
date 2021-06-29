@@ -12,14 +12,17 @@ function drawProgramMenu() {
 let programRunning = false;
 brick.buttonEnter.onEvent(ButtonEvent.Pressed, () => {
     const program = programs[selectedProgramIndex];
-    ROBOT.motor.stop();
     clearScreen();
     println(`Running ${program.name}...`);
 
-    if (!programRunning && program.setup) program.setup();
-
-    blinkLight(StatusLight.Green, 100)
-    program.run();
+    if (!programRunning) {
+        blinkLight(StatusLight.Green, 100);
+        control.runInParallel(program.run);
+        programRunning = true;
+    } else {
+        blinkLight(StatusLight.Red, 100);
+        control.reset();
+    }
 });
 
 brick.buttonUp.onEvent(ButtonEvent.Pressed, () => {
