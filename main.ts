@@ -1,51 +1,11 @@
-const programs: IProgram[] = [
-    {
-        name: "light sensor",
-        run: () => {
-            moveForward(Infinity);
-        },
-        setup: () => {
-            ROBOT.csensor.setThreshold(Light.Dark, 10);
-            ROBOT.csensor.onLightDetected(
-                LightIntensityMode.Reflected,
-                Light.Dark,
-                () => {
-                    if (!ROBOT.motor.isReady()) {
-                        ROBOT.motor.stop();
-                        moveForward(-10);
-                        turn(90);
-                        if (
-                            ROBOT.csensor.light(LightIntensityMode.Reflected) >
-                            ROBOT.csensor.threshold(Light.Dark)
-                        ) {
-                            moveForward(Infinity);
-                        }
-                    }
-                }
-            );
-        },
-    },
-    {
-        name: "square",
-        run: () => {
-            for (let i = 0; i < 4; i++) {
-                moveForward(20);
-                turn(90);
-            }
-        },
-    },
-];
-
 // code the program select down here
 let selectedProgramIndex = 0;
 function drawProgramMenu() {
     clearScreen();
     println("Choose a program: ");
     programs.forEach((program, i) => {
-        let output = program.name;
-        if (selectedProgramIndex == i) output = "> " + output;
-
-        println(output);
+        const beginChar = selectedProgramIndex == i ? ">" : " ";
+        println(`${beginChar} ${program.name}`);
     });
 }
 
