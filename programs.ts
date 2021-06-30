@@ -13,7 +13,7 @@ interface IProgram {
     run: () => void;
 }
 
-const programs: IProgram[] = [
+const programs = [
     {
         name: "square",
         run: () => {
@@ -25,4 +25,4 @@ const programs: IProgram[] = [
     },
     programMusic,
     programLightSensor,
-];
+]

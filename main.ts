@@ -3,6 +3,7 @@ let selectedProgramIndex = 0;
 function drawProgramMenu() {
     clearScreen();
     println("Choose a program: ");
+    println(`${programs[1].name}`);
     programs.forEach((program, i) => {
         const beginChar = selectedProgramIndex == i ? ">" : " ";
         println(`${beginChar} ${program.name}`);
@@ -17,8 +18,8 @@ brick.buttonEnter.onEvent(ButtonEvent.Pressed, () => {
     
     // unregister these events to prevent user from iteracting with menu 
     // while program is running
-    brick.buttonEnter.onEvent(ButtonEvent.Pressed, () => { });
-    brick.buttonUp.onEvent(ButtonEvent.Pressed, () => { });
+    brick.buttonEnter.onEvent(ButtonEvent.Pressed, () => {});
+    brick.buttonUp.onEvent(ButtonEvent.Pressed, () => {});
     brick.buttonDown.onEvent(ButtonEvent.Pressed, () => {});
     program.run();
 });

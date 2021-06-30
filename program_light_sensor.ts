@@ -25,7 +25,7 @@ const programLightSensor: IProgram = {
 
         brick.buttonDown.onEvent(ButtonEvent.Pressed, () => {
             blinkLight(StatusLight.Orange, 100);
-            ROBOT.csensor.setThreshold(Light.Dark, ROBOT.csensor.reflectedLight());
+            ROBOT.csensor.setThreshold(Light.Dark, ROBOT.csensor.reflectedLight() + 5);
         });
 
         println("Press up to calibrate light sensor.");

@@ -20,9 +20,13 @@ const ROBOT = {
      */
     rotationsPerDegree: 0.5 / 90,
     /**
-     * The max collumns of the screen the can safely be shown.
+     * The max collumns of the screen that can safely be shown.
      */
-    SCREEN_HEIGHT: 12,
+    screenWidth: 29,
+    /**
+     * The max rows of the screen that can safely be shown.
+     */
+    screenHeight: 12,
 };
 
 /**
@@ -52,17 +56,24 @@ let currentPrintLine = 1;
 /**
  * Prints a line of text to the robot screen.
  * Stores the current line to print and increments it when it prints.
+ * Handles line and screen wrap as well.
  * 
  * @param message - The message to print.
  */
 function println(message: string = ""): void {
-    if (currentPrintLine > 12) currentPrintLine = 1;
+    if (message.length > ROBOT.screenWidth) {
+        println(message.substr(0, ROBOT.screenWidth));
+        message = message.substr(ROBOT.screenWidth, message.length);
+    }
+
+    if (currentPrintLine > ROBOT.screenHeight) currentPrintLine = 1;
+    
     brick.showString(message, currentPrintLine);
     currentPrintLine++;
 }
 
 /**
- * Clears the robot screen.
+ * Clears the robot screen and sets the current print line to 1.
  */
 function clearScreen(): void  {
     brick.clearScreen();
@@ -72,7 +83,7 @@ function clearScreen(): void  {
 /**
  * Blinks a status light by the specified milliseconds.
  * 
- * @param statusLight - The status light to blink. Eg: `StatusLight.Red`.
+ * @param statusLight - The status light to blink. Eg. `StatusLight.Red`.
  * @param durationMillis - The duration of the blink in milliseconds.
  */
 function blinkLight(statusLight: StatusLight, durationMillis: number) {
