@@ -19,6 +19,10 @@ const ROBOT = {
      * moving the opposite way from each other.
      */
     rotationsPerDegree: 0.5 / 90,
+    /**
+     * The max collumns of the screen the can safely be shown.
+     */
+    SCREEN_HEIGHT: 12,
 };
 
 /**
@@ -40,22 +44,19 @@ function moveForward(cm: number, speed: number = 50): void {
  * @param speed - The speed to turn by between 0 and 100.
  */
 function turn(degrees: number, speed: number = 50): void {
-    ROBOT.motor.tank(
-        -speed,
-        speed,
-        ROBOT.rotationsPerDegree * degrees,
-        MoveUnit.Rotations
-    );
+    ROBOT.motor.tank(-speed, speed, ROBOT.rotationsPerDegree * degrees, MoveUnit.Rotations);
 }
 
 let currentPrintLine = 1;
 
 /**
  * Prints a line of text to the robot screen.
+ * Stores the current line to print and increments it when it prints.
  * 
  * @param message - The message to print.
  */
-function println(message: string): void {
+function println(message: string = ""): void {
+    if (currentPrintLine > 12) currentPrintLine = 1;
     brick.showString(message, currentPrintLine);
     currentPrintLine++;
 }
@@ -78,19 +79,4 @@ function blinkLight(statusLight: StatusLight, durationMillis: number) {
     brick.setStatusLight(statusLight);
     control.waitMicros(durationMillis * 1000);
     brick.setStatusLight(StatusLight.Off);
-}
-
-/**
- * Interface representing a program object to use to select and run.
- */
-interface IProgram {
-    /**
-     * The name of the program.
-     */
-    name: string;
-    /**
-     * Function that will be called every when the program is selected.
-     * Put the robot instructions here.
-     */
-    run: () => void;
 }

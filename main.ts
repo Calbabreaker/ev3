@@ -9,20 +9,18 @@ function drawProgramMenu() {
     });
 }
 
-let programRunning = false;
 brick.buttonEnter.onEvent(ButtonEvent.Pressed, () => {
     const program = programs[selectedProgramIndex];
     clearScreen();
     println(`Running ${program.name}...`);
-
-    if (!programRunning) {
-        blinkLight(StatusLight.Green, 100);
-        control.runInParallel(program.run);
-        programRunning = true;
-    } else {
-        blinkLight(StatusLight.Red, 100);
-        control.reset();
-    }
+    blinkLight(StatusLight.Green, 100);
+    
+    // unregister these events to prevent user from iteracting with menu 
+    // while program is running
+    brick.buttonEnter.onEvent(ButtonEvent.Pressed, () => { });
+    brick.buttonUp.onEvent(ButtonEvent.Pressed, () => { });
+    brick.buttonDown.onEvent(ButtonEvent.Pressed, () => {});
+    program.run();
 });
 
 brick.buttonUp.onEvent(ButtonEvent.Pressed, () => {

@@ -1,29 +1,19 @@
-const programs: IProgram[] = [
-    {
-        name: "light sensor",
-        run: () => {
-            ROBOT.csensor.setThreshold(Light.Dark, 10);
-            ROBOT.csensor.onLightDetected(
-                LightIntensityMode.Reflected,
-                Light.Dark,
-                () => {
-                    if (!ROBOT.motor.isReady()) {
-                        ROBOT.motor.stop();
-                        moveForward(-10);
-                        turn(90);
-                        if (
-                            ROBOT.csensor.light(LightIntensityMode.Reflected) >
-                            ROBOT.csensor.threshold(Light.Dark)
-                        ) {
-                            moveForward(Infinity);
-                        }
-                    }
-                }
-            );
+/**
+ * Interface representing a program object to use in the program select menu to run.
+ */
+interface IProgram {
+    /**
+     * The name of the program.
+     */
+    name: string;
+    /**
+     * Function that will be called every when the program is selected.
+     * Put the robot instructions here.
+     */
+    run: () => void;
+}
 
-            moveForward(Infinity);
-        },
-    },
+const programs: IProgram[] = [
     {
         name: "square",
         run: () => {
@@ -34,4 +24,5 @@ const programs: IProgram[] = [
         },
     },
     programMusic,
+    programLightSensor,
 ];
