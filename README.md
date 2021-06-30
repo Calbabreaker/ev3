@@ -1,7 +1,7 @@
 ## EV3 programming ![Build status badge](https://github.com/calbabreaker/ev3/workflows/MakeCode/badge.svg)
 
 This EV3 program features a program select menu to run different programs in this program.
-Programs include light sensor, music player.
+Programs include square mover, light sensor (stay on light area) and music player.
 
 To edit this repository in MakeCode:
 
