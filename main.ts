@@ -3,7 +3,6 @@ let selectedProgramIndex = 0;
 function drawProgramMenu() {
     clearScreen();
     println("Choose a program: ");
-    println(`${programs[1].name}`);
     programs.forEach((program, i) => {
         const beginChar = selectedProgramIndex == i ? ">" : " ";
         println(`${beginChar} ${program.name}`);
