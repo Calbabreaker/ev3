@@ -9,9 +9,9 @@
         "main.ts",
         "README.md",
         "robot.ts",
+        "program_light_sensor.ts",
         "program_music.ts",
-        "programs.ts",
-        "program_light_sensor.ts"
+        "programs.ts"
     ],
     "testFiles": [],
     "supportedTargets": [
