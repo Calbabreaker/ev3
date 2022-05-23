@@ -11,11 +11,9 @@
         "robot.ts",
         "program_light_sensor.ts",
         "program_music.ts",
-        "programs.ts"
+        "program_shape.ts"
     ],
     "testFiles": [],
-    "supportedTargets": [
-        "ev3"
-    ],
+    "supportedTargets": ["ev3"],
     "preferredEditor": "tsprj"
 }

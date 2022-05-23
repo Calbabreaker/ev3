@@ -15,7 +15,7 @@ const ROBOT = {
      */
     rotationsPerCM: 1 / 17.6,
     /**
-     * The amount rotations needed to turn 1deg with both motors 
+     * The amount rotations needed to turn 1deg with both motors
      * moving the opposite way from each other.
      */
     rotationsPerDegree: 0.5 / 90,
@@ -31,8 +31,8 @@ const ROBOT = {
 
 /**
  * Moves the robot forward by the specified amount in centimetres.
- * 
- * @param cm - Centimetres to move forward by. Specifying a 
+ *
+ * @param cm - Centimetres to move forward by. Specifying a
  *             negative amount would move it backwards
  * @param speed - The speed to move by between 0 and 100.
  */
@@ -42,7 +42,7 @@ function moveForward(cm: number, speed: number = 50): void {
 
 /**
  * Turns the robot right by the specified amount in degrees.
- * 
+ *
  * @param degrees - Degrees to move forward by. Specifying a
  *                  negative amount would make it turn left.
  * @param speed - The speed to turn by between 0 and 100.
@@ -57,7 +57,7 @@ let currentPrintLine = 1;
  * Prints a line of text to the robot screen.
  * Stores the current line to print and increments it when it prints.
  * Handles line and screen wrap as well.
- * 
+ *
  * @param message - The message to print.
  */
 function println(message: string = ""): void {
@@ -67,7 +67,7 @@ function println(message: string = ""): void {
     }
 
     if (currentPrintLine > ROBOT.screenHeight) currentPrintLine = 1;
-    
+
     brick.showString(message, currentPrintLine);
     currentPrintLine++;
 }
@@ -75,14 +75,14 @@ function println(message: string = ""): void {
 /**
  * Clears the robot screen and sets the current print line to 1.
  */
-function clearScreen(): void  {
+function clearScreen(): void {
     brick.clearScreen();
     currentPrintLine = 1;
 }
 
 /**
  * Blinks a status light by the specified milliseconds.
- * 
+ *
  * @param statusLight - The status light to blink. Eg. `StatusLight.Red`.
  * @param durationMillis - The duration of the blink in milliseconds.
  */
@@ -91,3 +91,15 @@ function blinkLight(statusLight: StatusLight, durationMillis: number) {
     control.waitMicros(durationMillis * 1000);
     brick.setStatusLight(StatusLight.Off);
 }
+
+class Program {
+    name: string;
+    run: () => void;
+
+    constructor(name: string, run: () => void) {
+        this.name = name;
+        this.run = run;
+    }
+}
+
+const programs: Program[] = [];

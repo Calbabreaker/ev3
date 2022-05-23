@@ -1,6 +1,5 @@
-const programLightSensor: IProgram = {
-    name: "light sensor",
-    run: () => {
+programs.push(
+    new Program("light sensor", () => {
         let mode = Light.Dark;
         const detectFunc = () => {
             // don't do it if the robot is not moving
@@ -9,19 +8,19 @@ const programLightSensor: IProgram = {
             ROBOT.motor.stop();
             moveForward(-10);
             turn(45);
-            if (
-                ROBOT.csensor.light(LightIntensityMode.Reflected) >
-                ROBOT.csensor.threshold(mode)
-            ) {
+            if (ROBOT.csensor.light(LightIntensityMode.Reflected) > ROBOT.csensor.threshold(mode)) {
                 moveForward(Infinity);
             }
-        }
+        };
 
         const setMode = (newMode: Light) => {
             mode = newMode;
             ROBOT.csensor.onLightDetected(LightIntensityMode.Reflected, mode, detectFunc);
-            brick.showString(`Reflected Mode: ${mode == Light.Dark ? "Dark" : "Bright"}`, currentPrintLine + 2);
-        }
+            brick.showString(
+                `Reflected Mode: ${mode == Light.Dark ? "Dark" : "Bright"}`,
+                currentPrintLine + 2
+            );
+        };
 
         brick.buttonEnter.onEvent(ButtonEvent.Pressed, () => {
             if (!ROBOT.motor.isReady()) return;
@@ -50,5 +49,5 @@ const programLightSensor: IProgram = {
         println("Press enter to start program.");
         println("Press left use Dark mode and right to use Bright.");
         setMode(Light.Dark);
-    },
-};
+    })
+);
